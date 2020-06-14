@@ -25,6 +25,11 @@ def _is_three_months_or_more_ago(date: str) -> bool:
         return False
 
 
+def _is_on_do_list(task_data) -> bool:
+    """Return whether or not the task represented by the task_data is on the do list."""
+    return task_data['metadata'][TO_DONT_METADTA_KEY]['list'] == 'do'
+
+
 def search(query: str, ignore_done_results=True):
     """."""
     results = core.search(query)
@@ -143,7 +148,8 @@ def _delete_old_tasks():
     """."""
     task_list = tasks()
     for task in task_list:
-        if _is_three_months_or_more_ago(task['date_added']):
-            delete(task['name'])
+        if not _is_on_do_list(task):
+            if _is_three_months_or_more_ago(task['date_added']):
+                delete(task['name'])
 
 _delete_old_tasks()
