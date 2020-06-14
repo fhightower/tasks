@@ -6,7 +6,7 @@ import sys
 import time
 
 sys.path.append(os.path.abspath(os.path.join("..")))
-from democritus_core import randomSelection, date2Epoch, epochTimeNow
+from democritus_core import random_selection, date_to_epoch, epoch_time_now
 
 import core
 
@@ -15,8 +15,8 @@ TO_DONT_METADTA_KEY = 'toDont'
 
 def _is_three_months_or_more_ago(date: str) -> bool:
     """."""
-    old_date = date2Epoch(date)
-    now = epochTimeNow()
+    old_date = date_to_epoch(date)
+    now = epoch_time_now()
     ninety_days_difference = 7776000
 
     if now - old_date >= ninety_days_difference:
@@ -50,10 +50,10 @@ def move_to_do(task_name: str):
 
 def _celebrate():
     """."""
-    path = randomSelection([0, 1, 2, 3])
+    path = random_selection([0, 1, 2, 3])
     if path < 3:
         celebration_phrases = ['BOOM!', 'Yeeeessssssss', 'Score!', 'Nicely done ;)', 'Noice!']
-        s = randomSelection(celebration_phrases)
+        s = random_selection(celebration_phrases)
         for i in s:
             print(i, end='')
             time.sleep(0.25)

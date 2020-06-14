@@ -9,8 +9,8 @@ import sys
 sys.path.append(os.path.abspath(os.path.join("..")))
 from democritus_core import *
 
-base_directory = homeDirectoryJoin('tasks')
-base_task_file = homeDirectoryJoin('tasks/tasks')
+base_directory = home_directory_join('tasks')
+base_task_file = home_directory_join('tasks/tasks')
 
 # TODO: create a typings description of a task and add it to the functions below
 
@@ -45,11 +45,11 @@ def delete(task_name: str):
 
 def tasks():
     """."""
-    file_data = fileRead(base_task_file)
+    file_data = file_read(base_task_file)
     task_list = []
     for line in file_data.split('\n'):
         try:
-            json_task = jsonRead(line)
+            json_task = json_read(line)
         except Exception:
             if line != '':
                 print(f'Unable to parse this task as json: {line}')
@@ -60,10 +60,10 @@ def tasks():
 
 def _replace_task(task_data, replacement: str):
     """."""
-    task_file_data = fileRead(base_task_file)
+    task_file_data = file_read(base_task_file)
     task_text = _task_to_text(task_data)
     task_file_data = task_file_data.replace(task_text, replacement)
-    fileWrite(base_task_file, task_file_data)
+    file_write(base_task_file, task_file_data)
 
 
 def _write_task(task_data):
@@ -103,8 +103,8 @@ def add(task_name: str):
     return task_data
 
 
-if not directoryExists(base_directory):
-    directoryCreate(base_directory)
+if not directory_exists(base_directory):
+    directory_create(base_directory)
 
-if not fileExists(base_task_file):
-    fileWrite(base_task_file, '')
+if not file_exists(base_task_file):
+    file_write(base_task_file, '')
