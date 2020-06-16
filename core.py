@@ -69,7 +69,7 @@ def _replace_task(task_data, replacement: str):
 def _write_task(task_data):
     """."""
     new_task_text = _task_to_text(task_data)
-    result = fileAppend(base_task_file, new_task_text)
+    result = file_append(base_task_file, new_task_text)
     return result
 
 
