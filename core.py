@@ -11,6 +11,7 @@ from democritus_core import *
 
 base_directory = home_directory_join('tasks')
 base_task_file = home_directory_join('tasks/tasks')
+base_backup_task_file = home_directory_join('tasks/tasks.backup')
 
 # TODO: create a typings description of a task and add it to the functions below
 
@@ -108,3 +109,5 @@ if not directory_exists(base_directory):
 
 if not file_exists(base_task_file):
     file_write(base_task_file, '')
+else:
+    file_copy(base_task_file, base_backup_task_file)
