@@ -88,6 +88,11 @@ def task_with_name(task_name: str, fail_if_no_match=False):
 
 def add(task_name: str):
     """."""
+    if not task_name.strip():
+        message = 'You cannot create a task with an empty name.'
+        print(message)
+        return
+
     matching_task = task_with_name(task_name)
     if matching_task:
         message = f'There is already a task with the name "{task_name}" and no two tasks can have the same name.'
