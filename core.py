@@ -16,6 +16,11 @@ base_backup_task_file = home_directory_join('tasks/tasks.backup')
 # TODO: create a typings description of a task and add it to the functions below
 
 
+def _datestamp():
+    """Return a datestamp in the format to be used throughout the task management system."""
+    return str(datetime.date.today())
+
+
 def search(query_string: str):
     """."""
     query_string = query_string.lower()
@@ -100,7 +105,7 @@ def add(task_name: str):
         return
 
     task_data = {
-        "date_added": str(datetime.date.today()),
+        "date_added": _datestamp(),
         "metadata": {},
         "name": task_name
     }

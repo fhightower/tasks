@@ -79,7 +79,10 @@ def _celebrate():
 
 def move_to_done(task_name: str):
     """Move the task with the given name to the "dont" list."""
-    _celebrate()
+    _celebrate() 
+    finished_task = core.task_with_name(task_name, fail_if_no_match=True)
+    finished_task['metadata'][TO_DONT_METADTA_KEY]['date_done'] = core._datestamp()
+    core.update(task_name, finished_task)
     return _move_task_to_list(task_name, 'done')
 
 
