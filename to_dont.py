@@ -106,6 +106,14 @@ def do():
     return tasks
 
 
+def do_pretty_print():
+    """Print out the tasks of the "Do" list in a readable way."""
+    print('\n\n\n===TO DO:==========================================================================\n')
+    for i in do():
+        print(f'> {i["name"]}')
+    print('\n===================================================================================\n\n\n')
+    
+
 def done():
     """List tasks on the "Done" list."""
     tasks = _tasks_with_list_name('done')
