@@ -52,7 +52,6 @@ def delete(task_name: str):
 def tasks():
     """."""
     file_data = file_read(base_task_file)
-    task_list = []
     for line in file_data.split('\n'):
         try:
             json_task = json_read(line)
@@ -60,8 +59,7 @@ def tasks():
             if line != '':
                 print(f'Unable to parse this task as json: {line}')
         else:
-            task_list.append(json_task)
-    return task_list
+            yield json_task
 
 
 def _replace_task(task_data, replacement: str):
