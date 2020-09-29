@@ -104,11 +104,7 @@ def add(task_name: str):
         print(message)
         return
 
-    task_data = {
-        "date_added": _datestamp(),
-        "metadata": {},
-        "name": task_name
-    }
+    task_data = {"date_added": _datestamp(), "metadata": {}, "name": task_name}
 
     _write_task(task_data)
     return task_data

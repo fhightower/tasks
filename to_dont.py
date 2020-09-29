@@ -6,7 +6,14 @@ import sys
 import time
 
 sys.path.append(os.path.abspath(os.path.join("..")))
-from democritus_core import random_selection, date_to_epoch, epoch_time_now, date_standardize_all_args, date_standardize
+from democritus_core import (
+    random_selection,
+    date_to_epoch,
+    epoch_time_now,
+    date_standardize_all_args,
+    date_standardize,
+    list_count,
+)
 
 import core
 
@@ -79,7 +86,7 @@ def _celebrate():
 
 def move_to_done(task_name: str):
     """Move the task with the given name to the "dont" list."""
-    _celebrate() 
+    _celebrate()
     finished_task = core.task_with_name(task_name, fail_if_no_match=True)
     finished_task['metadata'][TO_DONT_METADTA_KEY]['date_done'] = core._datestamp()
     core.update(task_name, finished_task)
@@ -115,7 +122,7 @@ def do_pretty_print():
     for i in do():
         print(f'> {i["name"]}')
     print('\n===================================================================================\n\n\n')
-    
+
 
 def done():
     """List tasks on the "Done" list."""
@@ -149,9 +156,7 @@ def add(task_name: str):
     """Add a task (it will be added to the "Dont" list)."""
     new_task_data = core.add(task_name)
     if new_task_data:
-        new_task_data['metadata'][TO_DONT_METADTA_KEY] = {
-            'list': 'dont'
-        }
+        new_task_data['metadata'][TO_DONT_METADTA_KEY] = {'list': 'dont'}
         return core.update(task_name, new_task_data)
 
 
@@ -163,15 +168,21 @@ def _delete_old_tasks():
             if _is_three_months_or_more_ago(task['date_added']):
                 delete(task['name'])
 
+
 _delete_old_tasks()
 
 
-@date_standardize_all_args
 def metrics(time_frame_start='30 days ago', time_frame_end='now'):
     """Show metrics on completed tasks over time."""
+    time_frame_start = date_standardize(time_frame_start)
+    time_frame_end = date_standardize(time_frame_end)
     finished_tasks = done()
     metrics = list_count([task['metadata']['toDont'].get('date_done', None) for task in finished_tasks])
     # ignore tasks without a "Date Done"
     del metrics[None]
-    applicable_metrics = {k: v for k, v in metrics.items() if date_standardize(k) > time_frame_start and date_standardize(k) < time_frame_end }
+    applicable_metrics = {
+        k: v
+        for k, v in metrics.items()
+        if date_standardize(k) > time_frame_start and date_standardize(k) < time_frame_end
+    }
     return applicable_metrics
