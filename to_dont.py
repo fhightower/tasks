@@ -44,7 +44,7 @@ def search(query: str, ignore_done_results=True):
     updated_results = [result for result in results if result['metadata'][TO_DONT_METADTA_KEY]['list'] != 'deleted']
     if ignore_done_results:
         # remove tasks on the 'done' list
-        updated_results = [result for result in results if result['metadata'][TO_DONT_METADTA_KEY]['list'] != 'done']
+        updated_results = [result for result in updated_results if result['metadata'][TO_DONT_METADTA_KEY]['list'] != 'done']
     return updated_results
 
 
