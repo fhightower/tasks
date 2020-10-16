@@ -162,11 +162,10 @@ def add(task_name: str):
 
 def _delete_old_tasks():
     """."""
-    task_list = tasks()
-    for task in task_list:
-        if not _is_on_do_list(task):
-            if _is_three_months_or_more_ago(task['date_added']):
-                delete(task['name'])
+    to_dont_task_list = dont()
+    for task in to_dont_task_list:
+        if _is_three_months_or_more_ago(task['date_added']):
+            delete(task['name'])
 
 
 _delete_old_tasks()
