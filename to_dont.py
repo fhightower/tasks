@@ -10,8 +10,7 @@ from democritus_core import (
     random_selection,
     date_to_epoch,
     epoch_time_now,
-    date_standardize_all_args,
-    date_standardize,
+    date_parse,
     list_count,
 )
 
@@ -173,8 +172,8 @@ _delete_old_tasks()
 
 def metrics(time_frame_start='30 days ago', time_frame_end='now'):
     """Show metrics on completed tasks over time."""
-    time_frame_start = date_standardize(time_frame_start)
-    time_frame_end = date_standardize(time_frame_end)
+    time_frame_start = date_parse(time_frame_start)
+    time_frame_end = date_parse(time_frame_end)
     finished_tasks = done()
     metrics = list_count([task['metadata']['toDont'].get('date_done', None) for task in finished_tasks])
     # ignore tasks without a "Date Done"
@@ -182,6 +181,6 @@ def metrics(time_frame_start='30 days ago', time_frame_end='now'):
     applicable_metrics = {
         k: v
         for k, v in metrics.items()
-        if date_standardize(k) > time_frame_start and date_standardize(k) < time_frame_end
+        if date_parse(k) > time_frame_start and date_parse(k) < time_frame_end
     }
     return applicable_metrics
