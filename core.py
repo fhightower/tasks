@@ -5,12 +5,17 @@ import json
 import os
 import sys
 
-sys.path.append(os.path.abspath(os.path.join("..")))
-from democritus_core import *
+from democritus_core import file_read, json_read, home_directory_join, directory_exists, directory_create, file_exists, file_write, file_copy
 
-base_directory = home_directory_join('tasks')
-base_task_file = home_directory_join('tasks/tasks')
-base_backup_task_file = home_directory_join('tasks/tasks.backup')
+TASK_PATH_ENV_VAR_NAME = 'task_path'
+
+if not os.environ.get(TASK_PATH_ENV_VAR_NAME):
+    message = f'We need the path to the directory in which tasks will be stored. We expect this path in the environment variable named: {TASK_PATH_ENV_VAR_NAME}.'
+    raise RuntimeError(message)
+
+base_directory = os.environ[TASK_PATH_ENV_VAR_NAME]
+base_task_file = os.path.join(base_directory, 'tasks')
+base_backup_task_file = os.path.join(base_directory, 'tasks.backup')
 
 # TODO: create a typings description of a task and add it to the functions below
 

@@ -6,7 +6,7 @@ import time
 
 sys.path.append(os.path.abspath(os.path.join("..")))
 from democritus_core import (
-    random_selection,
+    random_choice,
     date_to_epoch,
     epoch_time_now,
     date_parse,
@@ -60,10 +60,10 @@ def move_to_do(task_name: str):
 
 def _celebrate():
     """."""
-    path = random_selection([0, 1, 2, 3])
+    path = random_choice([0, 1, 2, 3])
     if path < 3:
         celebration_phrases = ['BOOM!', 'Yeeeessssssss', 'Score!', 'Nicely done ;)', 'Noice!']
-        s = random_selection(celebration_phrases)
+        s = random_choice(celebration_phrases)
         for i in s:
             print(i, end='')
             time.sleep(0.25)
