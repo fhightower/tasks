@@ -119,10 +119,11 @@ def add(task_name: str):
     return task_data
 
 
-if not directory_exists(base_directory):
-    directory_create(base_directory)
+if __name__ == '__main__':
+    if not directory_exists(base_directory):
+        directory_create(base_directory)
 
-if not file_exists(base_task_file):
-    file_write(base_task_file, '')
-else:
-    file_copy(base_task_file, base_backup_task_file)
+    if not file_exists(base_task_file):
+        file_write(base_task_file, '')
+    else:
+        file_copy(base_task_file, base_backup_task_file)

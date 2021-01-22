@@ -134,10 +134,6 @@ def _delete_old_tasks():
             delete(task['name'])
 
 
-if __name__ == '__main__':
-    _delete_old_tasks()
-
-
 def metrics(time_frame_start='30 days ago', time_frame_end='now'):
     """Show metrics on completed tasks over time."""
     time_frame_start = date_parse(time_frame_start)
@@ -150,3 +146,7 @@ def metrics(time_frame_start='30 days ago', time_frame_end='now'):
         k: v for k, v in metrics.items() if date_parse(k) > time_frame_start and date_parse(k) < time_frame_end
     }
     return applicable_metrics
+
+
+if __name__ == '__main__':
+    _delete_old_tasks()

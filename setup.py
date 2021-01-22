@@ -22,11 +22,10 @@ setup(
     use_scm_version=True,
     setup_requires=['setuptools_scm'],
     packages=find_packages(exclude=('tests')),
-    include_package_data=True,
     install_requires=requirements,
     license="MIT license",
     zip_safe=True,
-    keywords="democritus,utility,python,converters,converters-utility,time,temperature,distance,time-converter,temperature-converter,distance-converter",
+    keywords="tasks",
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
         'Intended Audience :: Developers',
