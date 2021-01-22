@@ -1,4 +1,4 @@
-from my_tasks import core
+from tasks import core
 
 
 # def test_search():
