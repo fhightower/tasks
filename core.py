@@ -1,11 +1,9 @@
 import datetime
 import json
 import os
-import sys
 
-from democritus_core import (
+from democritus_file_system import (
     file_read,
-    json_read,
     home_directory_join,
     directory_exists,
     directory_create,
@@ -14,6 +12,7 @@ from democritus_core import (
     file_copy,
     file_append,
 )
+from democritus_json import json_read
 
 TASK_PATH_ENV_VAR_NAME = 'TASK_DIRECTORY'
 

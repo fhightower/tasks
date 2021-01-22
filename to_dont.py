@@ -1,13 +1,9 @@
 import os
 import sys
-import time
 
-sys.path.append(os.path.abspath(os.path.join("..")))
-from democritus_core import list_count, date_to_epoch, epoch_time_now, date_parse
+from democritus_dates import date_to_epoch, epoch_time_now, date_parse
 
-# from democritus_dates import date_to_epoch, epoch_time_now, date_parse
-
-# sys.path.append(os.path.abspath(os.path.join(".")))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '.')))
 import core
 
 TO_DONT_METADTA_KEY = 'toDont'

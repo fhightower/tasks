@@ -2,10 +2,6 @@ from core import *
 from core import _datestamp
 
 
-def test__datestamp():
-    assert _datestamp() == '2021-01-05'
-
-
 # def test_search():
 #     search()
 
