@@ -1,5 +1,4 @@
-from core import *
-from core import _datestamp
+from tasks import core
 
 
 # def test_search():

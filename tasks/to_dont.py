@@ -134,7 +134,8 @@ def _delete_old_tasks():
             delete(task['name'])
 
 
-_delete_old_tasks()
+if __name__ == '__main__':
+    _delete_old_tasks()
 
 
 def metrics(time_frame_start='30 days ago', time_frame_end='now'):
