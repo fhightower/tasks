@@ -1,18 +1,13 @@
-# -*- coding: utf-8 -*-
-
 import os
 import sys
 import time
 
 sys.path.append(os.path.abspath(os.path.join("..")))
-from democritus_core import (
-    random_choice,
-    date_to_epoch,
-    epoch_time_now,
-    date_parse,
-    list_count,
-)
+from democritus_core import list_count, date_to_epoch, epoch_time_now, date_parse
 
+# from democritus_dates import date_to_epoch, epoch_time_now, date_parse
+
+# sys.path.append(os.path.abspath(os.path.join(".")))
 import core
 
 TO_DONT_METADTA_KEY = 'toDont'
@@ -42,7 +37,9 @@ def search(query: str, ignore_done_results=True):
     updated_results = [result for result in results if result['metadata'][TO_DONT_METADTA_KEY]['list'] != 'deleted']
     if ignore_done_results:
         # remove tasks on the 'done' list
-        updated_results = [result for result in updated_results if result['metadata'][TO_DONT_METADTA_KEY]['list'] != 'done']
+        updated_results = [
+            result for result in updated_results if result['metadata'][TO_DONT_METADTA_KEY]['list'] != 'done'
+        ]
     return updated_results
 
 
@@ -58,33 +55,8 @@ def move_to_do(task_name: str):
     return _move_task_to_list(task_name, 'do')
 
 
-def _celebrate():
-    """."""
-    path = random_choice([0, 1, 2, 3])
-    if path < 3:
-        celebration_phrases = ['BOOM!', 'Yeeeessssssss', 'Score!', 'Nicely done ;)', 'Noice!']
-        s = random_choice(celebration_phrases)
-        for i in s:
-            print(i, end='')
-            time.sleep(0.25)
-    else:
-        from IPython.display import clear_output
-
-        s = '=       O'
-        for i in range(1, 10):
-            if i < 9:
-                new_string = f'{s[:i]}-{s[i:]}'
-                print(new_string)
-            else:
-                new_string = f'{s[:i-1]}X'
-                print(new_string)
-            time.sleep(0.25)
-            clear_output(wait=True)
-
-
 def move_to_done(task_name: str):
     """Move the task with the given name to the "dont" list."""
-    _celebrate()
     finished_task = core.task_with_name(task_name, fail_if_no_match=True)
     finished_task['metadata'][TO_DONT_METADTA_KEY]['date_done'] = core._datestamp()
     core.update(task_name, finished_task)
@@ -178,8 +150,6 @@ def metrics(time_frame_start='30 days ago', time_frame_end='now'):
     # ignore tasks without a "Date Done"
     del metrics[None]
     applicable_metrics = {
-        k: v
-        for k, v in metrics.items()
-        if date_parse(k) > time_frame_start and date_parse(k) < time_frame_end
+        k: v for k, v in metrics.items() if date_parse(k) > time_frame_start and date_parse(k) < time_frame_end
     }
     return applicable_metrics

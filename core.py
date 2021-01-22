@@ -1,13 +1,21 @@
-# -*- coding: utf-8 -*-
-
 import datetime
 import json
 import os
 import sys
 
-from democritus_core import file_read, json_read, home_directory_join, directory_exists, directory_create, file_exists, file_write, file_copy
+from democritus_core import (
+    file_read,
+    json_read,
+    home_directory_join,
+    directory_exists,
+    directory_create,
+    file_exists,
+    file_write,
+    file_copy,
+    file_append,
+)
 
-TASK_PATH_ENV_VAR_NAME = 'task_path'
+TASK_PATH_ENV_VAR_NAME = 'TASK_DIRECTORY'
 
 if not os.environ.get(TASK_PATH_ENV_VAR_NAME):
     message = f'We need the path to the directory in which tasks will be stored. We expect this path in the environment variable named: {TASK_PATH_ENV_VAR_NAME}.'
@@ -56,7 +64,7 @@ def delete(task_name: str):
 def tasks():
     """."""
     file_data = file_read(base_task_file)
-    for line in file_data.split('\n'):
+    for line in file_data.splitlines():
         try:
             json_task = json_read(line)
         except Exception:
