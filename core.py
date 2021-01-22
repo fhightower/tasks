@@ -35,7 +35,7 @@ def _datestamp():
 def search(query_string: str):
     """."""
     query_string = query_string.lower()
-    matching_tasks = [task for task in tasks() if query_string in task['name'].lower()]
+    matching_tasks = [task for task in task_list() if query_string in task['name'].lower()]
 
     # TODO: it would be nice to fall back to a fuzzy search if no results for the given query_string were found
     return matching_tasks
@@ -60,7 +60,7 @@ def delete(task_name: str):
     return matching_task
 
 
-def tasks():
+def task_list():
     """."""
     file_data = file_read(base_task_file)
     for line in file_data.splitlines():
@@ -90,7 +90,7 @@ def _write_task(task_data):
 
 def task_with_name(task_name: str, fail_if_no_match=False):
     """."""
-    matching_tasks = [task_data for task_data in tasks() if task_data['name'] == task_name]
+    matching_tasks = [task_data for task_data in task_list() if task_data['name'] == task_name]
     if any(matching_tasks):
         return matching_tasks[0]
     else:

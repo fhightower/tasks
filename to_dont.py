@@ -105,15 +105,15 @@ def dont():
 def _tasks_with_list_name(list_name, task_list=None):
     """."""
     if task_list is None:
-        task_list = tasks()
+        task_list = task_list()
 
     filtered_tasks = [task for task in task_list if task['metadata'][TO_DONT_METADTA_KEY]['list'] == list_name]
     return filtered_tasks
 
 
-def tasks():
+def task_list():
     """."""
-    all_tasks = core.tasks()
+    all_tasks = core.task_list()
     to_dont_tasks = [task for task in all_tasks if task['metadata'].get(TO_DONT_METADTA_KEY)]
     return to_dont_tasks
 
